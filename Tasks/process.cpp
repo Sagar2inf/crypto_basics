@@ -34,6 +34,7 @@ vector<uchar> enc(string s){
     mt19937 gen(rd());
     uniform_int_distribution<int> dist(1, 2);
     int mode = dist(gen);
+    // mode = 1;
     vector<uchar> encrypted_text;
     vector<uchar> IV = random_IV();
     for(int i = 0; i < plain_text.size(); i+=16){
@@ -44,6 +45,7 @@ vector<uchar> enc(string s){
         vector<uchar> enc_block = aes_enc(block, IV, key, mode);
         encrypted_text.insert(encrypted_text.end(), enc_block.begin(), enc_block.end());
     }
+    cout << (mode == 1?"It is ECB": "It is CBC") << endl;
     return encrypted_text;
 }
 

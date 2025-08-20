@@ -16,6 +16,10 @@ vector<uchar> rand_key(int len = 16){
         uchar x = static_cast<uchar>(rand_int(1, 255));
         key.push_back(x);
     }
+    // for(auto & it: key){
+    //     cout << hex << int(it) << " ";
+    // }
+    // cout << endl;
     return key;
 }
 
