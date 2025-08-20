@@ -5,3 +5,5 @@ This is the random encryption of plaintext. the steps for encryption are used in
 3) The mode of encryption is also Randomly choosen
 4) If the mode of encryption is CBC, the IV will also choosen randomly.
 The command to run this method is 
+```./ecb-cbc-detect.sh ```
+because of two initial random padding of random length, it is hard to detect ECB or CBC(for small plaintext).
