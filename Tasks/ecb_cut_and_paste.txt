@@ -1,0 +1,21 @@
+My Approach:
+(1) The ```Profile_for``` will take Email(The '&' and '=' will be removed automatically).
+(2) Since ECB is block encryption. 
+    Block1: email={email} -> need 10 bytes in email, for making it complete block
+    Block2: &uid=10&user= -> need 3 pre bytes to make it complete block
+    block3: user + padding.
+(3) i will use ```email = AAAAAAAAAAAAA -> 13 characters```.
+    so ```Block1: email=AAAAAAAAAA
+       Block2: AAA&uid=10&user=
+       Block3: user+padding```
+(4) now ecb encrypt it blockwise, so i will replce last black cipher text with ciphertext of "admin".
+(5) But since key is hidden, so i don't know what is the ciphertext for "admin"
+    so i will do one more step. Instead of 13 Characters in email, i will add 13 + 16 characters in email.
+    ```Block1 = email=AAAAAAAAAA
+    Block2 = admin+padding -> using pkcs#7 this block = admin{raw byte of 11}.
+    Block3 = AAA&uid=10&user=
+    Block4 = user+padding```
+    
+(6) now encrypt each block and then replace block 4 with block 2 and remove block 2
+    like this ciphertext = block1+block3+block2
+(7) now decrypt it under say kay and it will generate admin instad of user.
